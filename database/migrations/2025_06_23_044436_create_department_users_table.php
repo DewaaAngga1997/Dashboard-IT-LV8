@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('department_users', function (Blueprint $table) {
             $table->id();
-            $table->string('department_user_name');
+            $table->string('department_user_name');     
             $table->timestamps();
             $table->softDeletes();
             });

@@ -9,8 +9,4 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateDepartmentUser extends CreateRecord
 {
     protected static string $resource = DepartmentUserResource::class;
-    protected function getRedirectUrl(): string
-    {
-        return $this->getResource()::getUrl('index');
-    }
 }
