@@ -69,6 +69,7 @@ class DepartmentResource extends Resource
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\RestoreAction::make(),
+                Tables\Actions\ForceDeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

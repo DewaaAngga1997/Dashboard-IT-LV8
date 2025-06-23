@@ -6,6 +6,7 @@ use App\Filament\Resources\DepartmentUserResource\Pages;
 use App\Filament\Resources\DepartmentUserResource\RelationManagers;
 use App\Models\DepartmentUser;
 use Filament\Forms;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -30,6 +31,11 @@ class DepartmentUserResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('department_user_name')
                     ->required(),
+                Forms\Components\Select::make('department_id')
+                    ->label('Department') // label opsional
+                    ->relationship('department', 'department_name') // relasi ke model Department
+                    ->required()
+                    
             ]);
     }
 
@@ -48,6 +54,8 @@ class DepartmentUserResource extends Resource
                     }
                 ),
                 Tables\Columns\TextColumn::make('department_user_name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('department.department_name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -69,6 +77,7 @@ class DepartmentUserResource extends Resource
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\RestoreAction::make(),
+                Tables\Actions\ForceDeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
