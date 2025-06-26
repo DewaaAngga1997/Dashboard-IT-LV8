@@ -146,9 +146,4 @@ class ComputerResource extends Resource
             // 'edit' => Pages\EditComputer::route('/{record}/edit'),
         ];
     }
-
-    public static function getMaxContentWidth(): string
-    {
-        return 'full';
-    }
 }
