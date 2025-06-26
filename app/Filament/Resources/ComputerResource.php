@@ -9,10 +9,12 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Contracts\HasTable;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use stdClass;
 
 class ComputerResource extends Resource
 {
@@ -32,7 +34,7 @@ class ComputerResource extends Resource
                     ->reactive()
                     ->required(),
 
-                 Forms\Components\Select::make('department_users_id')
+                Forms\Components\Select::make('department_users_id')
                     ->label('Department User')
                     ->options(function (callable $get) {
                         $departmentId = $get('department_id');
@@ -40,10 +42,10 @@ class ComputerResource extends Resource
                         return \App\Models\DepartmentUser::where('department_id', $departmentId)
                             ->pluck('department_user_name', 'id');
                     })
-        ->required()
-        ->searchable()
-        ->disabled(fn (callable $get) => !$get('department_id'))
-        ->loadingMessage('Loading...'),
+                    ->required()
+                    ->searchable()
+                    ->disabled(fn(callable $get) => !$get('department_id'))
+                    ->loadingMessage('Loading...'),
                 Forms\Components\DatePicker::make('tanggal_pembelian'),
                 Forms\Components\TextInput::make('specifications')
                     ->required(),
@@ -72,6 +74,8 @@ class ComputerResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('No')
+                    ->rowIndex(),
                 Tables\Columns\TextColumn::make('department.department_name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('departmentUser.department_user_name')
@@ -111,7 +115,7 @@ class ComputerResource extends Resource
                 SelectFilter::make('department_id')
                     ->label('Department')
                     ->relationship('department', 'department_name')
-                    
+
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

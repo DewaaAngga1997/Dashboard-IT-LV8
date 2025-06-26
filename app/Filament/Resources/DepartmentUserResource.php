@@ -35,7 +35,7 @@ class DepartmentUserResource extends Resource
                     ->label('Department') // label opsional
                     ->relationship('department', 'department_name') // relasi ke model Department
                     ->required()
-                    
+
             ]);
     }
 
@@ -43,16 +43,8 @@ class DepartmentUserResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('No')->state(
-                    static function (HasTable $livewire, stdClass $rowLoop): string {
-                        return (string) (
-                            $rowLoop->iteration +
-                            ($livewire->getTableRecordsPerPage() * (
-                                $livewire->getTablePage() - 1
-                            ))
-                        );
-                    }
-                ),
+                Tables\Columns\TextColumn::make('No')
+                    ->rowIndex(),
                 Tables\Columns\TextColumn::make('department_user_name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('department.department_name')
@@ -71,7 +63,10 @@ class DepartmentUserResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
+                Tables\Filters\SelectFilter::make('department_id')
+                    ->label('Department')
+                    ->relationship('department', 'department_name'),
+                Tables\Filters\TrashedFilter::make()
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
