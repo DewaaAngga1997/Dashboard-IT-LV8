@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\DepartmentUserResource\Pages;
 
 use App\Filament\Resources\DepartmentUserResource;
+use App\Filament\Resources\DepartmentUserResource\Widgets\DepartmentUsersCount;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -14,6 +15,12 @@ class ListDepartmentUsers extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+        ];
+    }
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            DepartmentUsersCount::class,
         ];
     }
 }

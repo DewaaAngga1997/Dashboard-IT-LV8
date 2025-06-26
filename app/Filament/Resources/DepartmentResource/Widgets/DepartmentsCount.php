@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Filament\Resources\ComputerResource\Widgets;
+namespace App\Filament\Resources\DepartmentResource\Widgets;
 
+use App\Models\Department;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-use App\Models\Computer;
 
-class ComputersCount extends BaseWidget
+class DepartmentsCount extends BaseWidget
 {
     protected function getStats(): array
     {
         return [
-            Stat::make('Total of All Computers', Computer::count())
+            Stat::make('Total of All Departments', Department::count())
                 ->color('success')
-
         ];
     }
 }
