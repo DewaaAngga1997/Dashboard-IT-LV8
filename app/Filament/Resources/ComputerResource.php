@@ -81,6 +81,7 @@ class ComputerResource extends Resource
                 Tables\Columns\TextColumn::make('departmentUser.department_user_name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('tanggal_pembelian')
+                    ->date('j M Y')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('specifications')
                     ->searchable(),
@@ -144,5 +145,10 @@ class ComputerResource extends Resource
             // 'create' => Pages\CreateComputer::route('/create'),
             // 'edit' => Pages\EditComputer::route('/{record}/edit'),
         ];
+    }
+
+    public static function getMaxContentWidth(): string
+    {
+        return 'full';
     }
 }
