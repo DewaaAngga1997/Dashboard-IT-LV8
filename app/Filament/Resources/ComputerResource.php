@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ComputerResource\Pages;
 use App\Filament\Resources\ComputerResource\RelationManagers;
+use App\Filament\Resources\ComputerResource\Widgets\ComputersCount;
 use App\Models\Computer;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -144,6 +145,12 @@ class ComputerResource extends Resource
             // 'view' => Pages\ViewComputer::route('/{record}'),
             // 'create' => Pages\CreateComputer::route('/create'),
             // 'edit' => Pages\EditComputer::route('/{record}/edit'),
+        ];
+    }
+    public static function getWidgets(): array
+    {
+        return [
+            ComputersCount::class,
         ];
     }
 }
