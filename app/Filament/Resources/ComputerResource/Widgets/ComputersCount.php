@@ -8,6 +8,7 @@ use App\Models\Computer;
 
 class ComputersCount extends BaseWidget
 {
+
     protected function getStats(): array
     {
         return [
@@ -16,5 +17,9 @@ class ComputersCount extends BaseWidget
             // ->description('All Computers Department')
 
         ];
+    }
+    public function getColumnSpan(): int | string | array
+    {
+        return '1';
     }
 }

@@ -17,4 +17,8 @@ class LaptopsCount extends BaseWidget
 
         ];
     }
+    public function getColumnSpan(): int | string | array
+    {
+        return '1'; // Inilah bagian yang membuat layout full
+    }
 }

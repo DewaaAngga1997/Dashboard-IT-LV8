@@ -11,8 +11,12 @@ class DepartmentUsersCount extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('Total of All Department Users', DepartmentUser::count())
+            Stat::make('Total Department Users', DepartmentUser::count())
                 ->color('success')
         ];
+    }
+    public function getColumnSpan(): int | string | array
+    {
+        return '1';
     }
 }

@@ -49,9 +49,11 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::make(),
-                ComputersCount::class,
-                LaptopsCount::class,
                 // Widgets\FilamentInfoWidget::class,
+                // ComputersCount::class,
+                // LaptopsCount::class,
+                // DepartmentsCount::class,
+                // DepartmentUsersCount::class
             ])
             ->middleware([
                 EncryptCookies::class,
