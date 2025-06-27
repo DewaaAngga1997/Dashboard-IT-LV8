@@ -2,28 +2,26 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ComputerResource\Pages;
-use App\Filament\Resources\ComputerResource\RelationManagers;
 use App\Filament\Resources\ComputerResource\Widgets\ComputersCount;
-use App\Models\Computer;
+use App\Filament\Resources\LaptopsResource\Pages;
+use App\Filament\Resources\LaptopsResource\RelationManagers;
+use App\Filament\Resources\LaptopsResource\Widgets\LaptopsCount;
+use App\Models\Laptops;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\Contracts\HasTable;
-use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use stdClass;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Filament\Notifications\Notification;
+use Filament\Tables\Filters\SelectFilter;
 
-class ComputerResource extends Resource
+class LaptopsResource extends Resource
 {
-    protected static ?string $model = Computer::class;
+    protected static ?string $model = Laptops::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-computer-desktop';
 
@@ -56,11 +54,7 @@ class ComputerResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('operating_system')
                     ->required(),
-                Forms\Components\TextInput::make('ket_pc')
-                    ->required(),
-                Forms\Components\TextInput::make('monitor')
-                    ->required(),
-                Forms\Components\TextInput::make('ket_monitor')
+                Forms\Components\TextInput::make('ket_laptop')
                     ->required(),
                 Forms\Components\TextInput::make('keyboard')
                     ->required(),
@@ -92,11 +86,7 @@ class ComputerResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('operating_system')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('ket_pc')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('monitor')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('ket_monitor')
+                Tables\Columns\TextColumn::make('ket_laptop')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('keyboard')
                     ->searchable(),
@@ -121,7 +111,6 @@ class ComputerResource extends Resource
                 SelectFilter::make('department_id')
                     ->label('Department')
                     ->relationship('department', 'department_name')
-
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -132,10 +121,10 @@ class ComputerResource extends Resource
             //     Tables\Actions\BulkActionGroup::make([
             //         Tables\Actions\DeleteBulkAction::make(),
             //     ]),
-            // ])
+            // ]);
             ->headerActions([
                 Tables\Actions\CreateAction::make()
-                    ->label('Add Computer')
+                    ->label('Add Laptop')
                     ->icon('heroicon-o-plus')
                     ->color('primary'),
 
@@ -145,7 +134,7 @@ class ComputerResource extends Resource
                     ->exports([
                         ExcelExport::make()
                             ->fromTable()
-                            ->withFilename('Data Computer - ' . now()->format('j M Y'))
+                            ->withFilename('Data Laptop - ' . now()->format('j M Y'))
                     ])
                     ->after(function () {
                         // Notifikasi muncul setelah download selesai
@@ -169,10 +158,9 @@ class ComputerResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListComputers::route('/'),
-            // 'view' => Pages\ViewComputer::route('/{record}'),
-            // 'create' => Pages\CreateComputer::route('/create'),
-            // 'edit' => Pages\EditComputer::route('/{record}/edit'),
+            'index' => Pages\ListLaptops::route('/'),
+            // 'create' => Pages\CreateLaptops::route('/create'),
+            // 'edit' => Pages\EditLaptops::route('/{record}/edit'),
         ];
     }
 }
