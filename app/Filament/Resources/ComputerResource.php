@@ -145,7 +145,7 @@ class ComputerResource extends Resource
                     ->exports([
                         ExcelExport::make()
                             ->fromTable()
-                            ->withFilename('DataComputer-' . now()->format('j M Y'))
+                            ->withFilename('Data Computer - ' . now()->format('j M Y'))
                     ])
                     ->after(function () {
                         // Notifikasi muncul setelah download selesai
