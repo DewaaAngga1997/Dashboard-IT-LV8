@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Filament\Resources\DepartmentUserResource\Widgets;
+namespace App\Filament\Resources\PrinterResource\Widgets;
 
-use App\Models\DepartmentUser;
+use App\Models\Printer;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
-class DepartmentUsersCount extends BaseWidget
+class PrinterCount extends BaseWidget
 {
     protected function getStats(): array
     {
         return [
-            Stat::make('Total Department Users', DepartmentUser::count())
+            Stat::make('Total Printers', Printer::count())
                 ->color('success')
+            // ->description('All Printers Department')
         ];
     }
     public function getColumnSpan(): int | string | array
     {
-        return 'full';
+        return '1';
     }
 }

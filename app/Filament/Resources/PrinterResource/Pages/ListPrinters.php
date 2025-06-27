@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\PrinterResource\Pages;
 
+use App\Filament\Resources\LaptopsResource\Widgets\LaptopsCount;
 use App\Filament\Resources\PrinterResource;
 use Filament\Resources\Pages\ListRecords;
 
@@ -20,7 +21,7 @@ class ListPrinters extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            // 
+            LaptopsCount::class,
         ];
     }
 }

@@ -15,7 +15,6 @@ class ComputersCount extends BaseWidget
             Stat::make('Total Computers', Computer::count())
                 ->color('success')
             // ->description('All Computers Department')
-
         ];
     }
     public function getColumnSpan(): int | string | array
