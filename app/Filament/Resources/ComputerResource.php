@@ -16,6 +16,10 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use stdClass;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use Filament\Notifications\Notification;
 
 class ComputerResource extends Resource
 {
@@ -124,10 +128,34 @@ class ComputerResource extends Resource
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+            // ->bulkActions([
+            //     Tables\Actions\BulkActionGroup::make([
+            //         Tables\Actions\DeleteBulkAction::make(),
+            //     ]),
+            // ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make()
+                    ->label('Add Computer')
+                    ->icon('heroicon-o-plus')
+                    ->color('primary'),
+
+                ExportAction::make()
+                    ->label('Export Data')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->exports([
+                        ExcelExport::make()
+                            ->fromTable()
+                            ->withFilename('DataComputer-' . now()->format('j M Y'))
+                    ])
+                    ->after(function () {
+                        // Notifikasi muncul setelah download selesai
+                        Notification::make()
+                            ->title('Export Berhasil')
+                            ->body('Data berhasil di export')
+                            ->success()
+                            ->duration(5000)
+                            ->send();
+                    })
             ]);
     }
 
