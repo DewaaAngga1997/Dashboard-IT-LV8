@@ -16,6 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use stdClass;
+use Filament\Notifications\Notification;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
 
 class DepartmentUserResource extends Resource
 {
@@ -73,12 +76,38 @@ class DepartmentUserResource extends Resource
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\RestoreAction::make(),
                 Tables\Actions\ForceDeleteAction::make(),
+            ])
+            // ->bulkActions([
+            //     Tables\Actions\BulkActionGroup::make([
+            //         Tables\Actions\DeleteBulkAction::make(),
+            //     ]),
+            // ]);
+
+            ->headerActions([
+                Tables\Actions\CreateAction::make()
+                    ->label('Add Departement User')
+                    ->icon('heroicon-o-plus')
+                    ->color('primary'),
+
+                ExportAction::make()
+                    ->label('Export Data')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->exports([
+                        ExcelExport::make()
+                            ->fromTable()
+                            ->withFilename('Data Department User - ' . now()->format('j M Y'))
+                            ->except(['No'])
+                    ])
+                    ->after(function () {
+                        // Notifikasi muncul setelah download selesai
+                        Notification::make()
+                            ->title('Export Berhasil')
+                            ->body('Data berhasil di export')
+                            ->success()
+                            ->duration(5000)
+                            ->send();
+                    })
             ]);
-        // ->bulkActions([
-        //     Tables\Actions\BulkActionGroup::make([
-        //         Tables\Actions\DeleteBulkAction::make(),
-        //     ]),
-        // ]);
     }
 
     public static function getRelations(): array

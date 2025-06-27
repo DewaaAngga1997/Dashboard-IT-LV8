@@ -11,8 +11,9 @@ class ComputersCount extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('Total of All Computers', Computer::count())
+            Stat::make('Total Computers', Computer::count())
                 ->color('success')
+            // ->description('All Computers Department')
 
         ];
     }
