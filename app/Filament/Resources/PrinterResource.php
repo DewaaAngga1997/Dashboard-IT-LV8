@@ -2,25 +2,26 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\LaptopsResource\Pages;
-use App\Models\Laptops;
+use App\Filament\Resources\PrinterResource\Pages;
+use App\Models\Printer;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Filament\Notifications\Notification;
-use Filament\Tables\Filters\SelectFilter;
 
-class LaptopsResource extends Resource
+class PrinterResource extends Resource
 {
-    protected static ?string $model = Laptops::class;
+    protected static ?string $model = Printer::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-computer-desktop';
+    protected static ?string $navigationIcon = 'heroicon-o-printer';
 
     protected static ?string $navigationGroup = 'Data Asets';
+
 
     public static function form(Form $form): Form
     {
@@ -45,19 +46,7 @@ class LaptopsResource extends Resource
                     ->disabled(fn(callable $get) => !$get('department_id'))
                     ->loadingMessage('Loading...'),
                 Forms\Components\DatePicker::make('tanggal_pembelian'),
-                Forms\Components\TextInput::make('specifications')
-                    ->required(),
-                Forms\Components\TextInput::make('operating_system')
-                    ->required(),
-                Forms\Components\TextInput::make('ket_laptop')
-                    ->required(),
-                Forms\Components\TextInput::make('keyboard')
-                    ->required(),
-                Forms\Components\TextInput::make('ket_keyboard')
-                    ->required(),
-                Forms\Components\TextInput::make('mouse')
-                    ->required(),
-                Forms\Components\TextInput::make('ket_mouse')
+                Forms\Components\TextInput::make('type_printer')
                     ->required(),
                 Forms\Components\TextInput::make('keterangan')
                     ->required(),
@@ -77,19 +66,7 @@ class LaptopsResource extends Resource
                 Tables\Columns\TextColumn::make('tanggal_pembelian')
                     ->date('j M Y')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('specifications')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('operating_system')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('ket_laptop')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('keyboard')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('ket_keyboard')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('mouse')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('ket_mouse')
+                Tables\Columns\TextColumn::make('type_printer')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('keterangan')
                     ->searchable(),
@@ -119,7 +96,7 @@ class LaptopsResource extends Resource
             // ]);
             ->headerActions([
                 Tables\Actions\CreateAction::make()
-                    ->label('Add Laptop')
+                    ->label('Add Printer')
                     ->icon('heroicon-o-plus')
                     ->color('primary'),
 
@@ -129,7 +106,7 @@ class LaptopsResource extends Resource
                     ->exports([
                         ExcelExport::make()
                             ->fromTable()
-                            ->withFilename('Data Laptop - ' . now()->format('j M Y'))
+                            ->withFilename('Data Printer - ' . now()->format('j M Y'))
                             ->except(['No'])
                     ])
                     ->after(function () {
@@ -154,9 +131,9 @@ class LaptopsResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListLaptops::route('/'),
-            // 'create' => Pages\CreateLaptops::route('/create'),
-            // 'edit' => Pages\EditLaptops::route('/{record}/edit'),
+            'index' => Pages\ListPrinters::route('/'),
+            // 'create' => Pages\CreatePrinter::route('/create'),
+            // 'edit' => Pages\EditPrinter::route('/{record}/edit'),
         ];
     }
 }

@@ -3,20 +3,13 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ComputerResource\Pages;
-use App\Filament\Resources\ComputerResource\RelationManagers;
-use App\Filament\Resources\ComputerResource\Widgets\ComputersCount;
 use App\Models\Computer;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\Contracts\HasTable;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use stdClass;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Filament\Notifications\Notification;
@@ -146,6 +139,7 @@ class ComputerResource extends Resource
                         ExcelExport::make()
                             ->fromTable()
                             ->withFilename('Data Computer - ' . now()->format('j M Y'))
+                            ->except(['No'])
                     ])
                     ->after(function () {
                         // Notifikasi muncul setelah download selesai
