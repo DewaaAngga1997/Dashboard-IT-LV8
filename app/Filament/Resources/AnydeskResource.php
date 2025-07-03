@@ -78,7 +78,7 @@ class AnydeskResource extends Resource
                 // Tables\Actions\ViewAction::make(),
                 Tables\Actions\Action::make('connectAnyDesk')
                     ->label('Connect AnyDesk')
-                    ->icon('heroicon-o-computer-desktop')
+                    ->icon('heroicon-o-tv')
                     ->color('success')
                     ->action(function ($record) {
                         $anydeskId = $anydeskId = $record->anydesk_id;
