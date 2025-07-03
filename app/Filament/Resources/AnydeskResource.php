@@ -75,7 +75,18 @@ class AnydeskResource extends Resource
                     ->relationship('department', 'department_name')
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                // Tables\Actions\ViewAction::make(),
+                Tables\Actions\Action::make('connectAnyDesk')
+                    ->label('Connect AnyDesk')
+                    ->icon('heroicon-o-computer-desktop')
+                    ->color('success')
+                    ->action(function ($record) {
+                        $anydeskId = $anydeskId = $record->anydesk_id;
+                        if ($anydeskId) {
+                            // Jalankan AnyDesk dengan ID yang sesuai
+                            exec("start anydesk:{$anydeskId}");
+                        }
+                    }),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
