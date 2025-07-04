@@ -139,7 +139,14 @@ class LaptopsResource extends Resource
             ->filters([
                 SelectFilter::make('department_id')
                     ->label('Department')
-                    ->relationship('department', 'department_name')
+                    ->relationship('department', 'department_name'),
+                SelectFilter::make('ket_laptop') // <= Tambahan filter ini
+                    ->label('Keterangan Laptop')
+                    ->options([
+                        'Baik' => 'Baik',
+                        'Perlu Maintenance' => 'Perlu Maintenance',
+                        'Rusak' => 'Rusak',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
