@@ -2,12 +2,7 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Resources\ComputerResource\Widgets\ComputersCount;
-use App\Filament\Resources\DepartmentResource\Widgets\DepartmentsCount;
-use App\Filament\Resources\DepartmentUserResource\Widgets\DepartmentUsersCount;
-use App\Filament\Resources\LaptopsResource\Widgets\LaptopsCount;
-use App\Models\Department;
-use App\Models\Laptops;
+
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -51,6 +46,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::make(),
+
                 // Widgets\FilamentInfoWidget::class,
                 // ComputersCount::class,
                 // LaptopsCount::class,

@@ -5,7 +5,7 @@ namespace App\Filament\Widgets;
 use App\Models\Handphone;
 use Filament\Widgets\ChartWidget;
 
-class HpStatusChart extends ChartWidget
+class ZHpStatusChart extends ChartWidget
 {
     protected static ?string $heading = 'Status Handphone';
 

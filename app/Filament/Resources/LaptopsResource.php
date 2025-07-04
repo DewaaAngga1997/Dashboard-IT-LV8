@@ -75,9 +75,6 @@ class LaptopsResource extends Resource
                 Forms\Components\Textarea::make('keterangan')
                     ->rows(3)
                     ->columnSpan('full')
-                    ->required()
-                    ->extraAttributes(['style' => 'text-transform: uppercase;'])
-                    ->afterStateUpdated(fn($state, callable $set) => $set('keterangan', strtoupper($state)))
                     ->required(),
             ]);
     }
