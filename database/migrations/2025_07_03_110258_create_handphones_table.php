@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('tanggal_pembelian')->nullable();
             $table->string('brand');
             $table->string('specification');
+            $table->string('ket_handphone');
             $table->string('keterangan');
             $table->timestamps();
         });

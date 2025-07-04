@@ -49,7 +49,18 @@ class HandphoneResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('specification')
                     ->required(),
-                Forms\Components\TextInput::make('keterangan')
+                Forms\Components\Select::make('ket_handphone')
+                    ->options([
+                        'Baik' => 'Baik',
+                        'Rusak' => 'Rusak',
+                    ])
+                    ->required(),
+                Forms\Components\Textarea::make('keterangan')
+                    ->rows(3)
+                    ->columnSpan('full')
+                    ->required()
+                    ->extraAttributes(['style' => 'text-transform: uppercase;'])
+                    ->afterStateUpdated(fn($state, callable $set) => $set('keterangan', strtoupper($state)))
                     ->required(),
             ]);
     }
@@ -71,6 +82,13 @@ class HandphoneResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('specification')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('ket_handphone')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'Baik' => 'success',
+                        'Rusak' => 'danger',
+                    })
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('keterangan')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -85,7 +103,13 @@ class HandphoneResource extends Resource
             ->filters([
                 SelectFilter::make('department_id')
                     ->label('Department')
-                    ->relationship('department', 'department_name')
+                    ->relationship('department', 'department_name'),
+                SelectFilter::make('ket_handphone') // <= Tambahan filter ini
+                    ->label('Keterangan Handphone')
+                    ->options([
+                        'Baik' => 'Baik',
+                        'Rusak' => 'Rusak',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

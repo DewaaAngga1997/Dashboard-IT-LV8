@@ -16,6 +16,7 @@ class Handphone extends Model
         'tanggal_pembelian',
         'brand',
         'specification',
+        'ket_handphone',
         'keterangan',
     ];
     // Relasi ke tabel departments
