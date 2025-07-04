@@ -49,22 +49,43 @@ class ComputerResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('operating_system')
                     ->required(),
-                Forms\Components\TextInput::make('ket_pc')
+                Forms\Components\Select::make('ket_pc')
+                    ->options([
+                        'Baik' => 'Baik',
+                        'Perlu Maintenance' => 'Perlu Maintenance',
+                        'Rusak' => 'Rusak',
+                    ])
                     ->required(),
                 Forms\Components\TextInput::make('monitor')
                     ->required(),
-                Forms\Components\TextInput::make('ket_monitor')
+                Forms\Components\Select::make('ket_monitor')
+                    ->options([
+                        'Baik' => 'Baik',
+                        'Rusak' => 'Rusak',
+                    ])
                     ->required(),
                 Forms\Components\TextInput::make('keyboard')
                     ->required(),
-                Forms\Components\TextInput::make('ket_keyboard')
+                Forms\Components\Select::make('ket_keyboard')
+                    ->options([
+                        'Baik' => 'Baik',
+                        'Rusak' => 'Rusak',
+                    ])
                     ->required(),
                 Forms\Components\TextInput::make('mouse')
                     ->required(),
-                Forms\Components\TextInput::make('ket_mouse')
+                Forms\Components\Select::make('ket_mouse')
+                    ->options([
+                        'Baik' => 'Baik',
+                        'Rusak' => 'Rusak',
+                    ])
                     ->required(),
-                Forms\Components\TextInput::make('keterangan')
-                    ->required(),
+                Forms\Components\Textarea::make('keterangan')
+                    ->rows(3)
+                    ->columnSpan('full')
+                    ->required()
+                    ->extraAttributes(['style' => 'text-transform: uppercase;'])
+                    ->afterStateUpdated(fn($state, callable $set) => $set('keterangan', strtoupper($state))),
             ]);
     }
 

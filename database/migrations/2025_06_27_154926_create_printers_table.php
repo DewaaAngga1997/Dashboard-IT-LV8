@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('department_users_id')->constrained('department_users');
             $table->date('tanggal_pembelian')->nullable();
             $table->string('type_printer');
+            $table->string('ket_printer');
             $table->string('keterangan');
             $table->timestamps();
         });

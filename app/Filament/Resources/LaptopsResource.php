@@ -49,15 +49,28 @@ class LaptopsResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('operating_system')
                     ->required(),
-                Forms\Components\TextInput::make('ket_laptop')
+                Forms\Components\Select::make('ket_laptop')
+                    ->options([
+                        'Baik' => 'Baik',
+                        'Perlu Maintenance' => 'Perlu Maintenance',
+                        'Rusak' => 'Rusak',
+                    ])
                     ->required(),
                 Forms\Components\TextInput::make('keyboard')
                     ->required(),
-                Forms\Components\TextInput::make('ket_keyboard')
+                Forms\Components\Select::make('ket_keyboard')
+                    ->options([
+                        'Baik' => 'Baik',
+                        'Rusak' => 'Rusak',
+                    ])
                     ->required(),
                 Forms\Components\TextInput::make('mouse')
                     ->required(),
-                Forms\Components\TextInput::make('ket_mouse')
+                Forms\Components\Select::make('ket_mouse')
+                    ->options([
+                        'Baik' => 'Baik',
+                        'Rusak' => 'Rusak',
+                    ])
                     ->required(),
                 Forms\Components\TextInput::make('keterangan')
                     ->required(),

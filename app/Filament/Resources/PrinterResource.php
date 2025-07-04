@@ -48,7 +48,18 @@ class PrinterResource extends Resource
                 Forms\Components\DatePicker::make('tanggal_pembelian'),
                 Forms\Components\TextInput::make('type_printer')
                     ->required(),
-                Forms\Components\TextInput::make('keterangan')
+                Forms\Components\Select::make('ket_printer')
+                    ->options([
+                        'Baik' => 'Baik',
+                        'Rusak' => 'Rusak',
+                    ])
+                    ->required(),
+                Forms\Components\Textarea::make('keterangan')
+                    ->rows(3)
+                    ->columnSpan('full')
+                    ->required()
+                    ->extraAttributes(['style' => 'text-transform: uppercase;'])
+                    ->afterStateUpdated(fn($state, callable $set) => $set('keterangan', strtoupper($state)))
                     ->required(),
             ]);
     }
