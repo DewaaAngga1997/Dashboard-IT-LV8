@@ -51,6 +51,7 @@ class PrinterResource extends Resource
                 Forms\Components\Select::make('ket_printer')
                     ->options([
                         'Baik' => 'Baik',
+                        'Perlu Maintenance' => 'Perlu Maintenance',
                         'Rusak' => 'Rusak',
                     ])
                     ->required(),
@@ -83,6 +84,7 @@ class PrinterResource extends Resource
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
                         'Baik' => 'success',
+                        'Perlu Maintenance' => 'warning',
                         'Rusak' => 'danger',
                     })
                     ->searchable(),
@@ -100,7 +102,14 @@ class PrinterResource extends Resource
             ->filters([
                 SelectFilter::make('department_id')
                     ->label('Department')
-                    ->relationship('department', 'department_name')
+                    ->relationship('department', 'department_name'),
+                SelectFilter::make('ket_printer') // <= Tambahan filter ini
+                    ->label('Keterangan Laptop')
+                    ->options([
+                        'Baik' => 'Baik',
+                        'Perlu Maintenance' => 'Perlu Maintenance',
+                        'Rusak' => 'Rusak',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

@@ -7,7 +7,7 @@ use Filament\Widgets\ChartWidget;
 
 class LaptopStatusChart extends ChartWidget
 {
-    protected static ?string $heading = 'Chart';
+    protected static ?string $heading = 'Status Laptop';
 
     protected function getData(): array
     {
@@ -26,6 +26,8 @@ class LaptopStatusChart extends ChartWidget
 
         ];
     }
+
+
 
     protected function getType(): string
     {
