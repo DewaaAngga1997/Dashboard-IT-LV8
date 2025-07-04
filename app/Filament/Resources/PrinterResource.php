@@ -79,6 +79,13 @@ class PrinterResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type_printer')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('ket_printer')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'Baik' => 'success',
+                        'Rusak' => 'danger',
+                    })
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('keterangan')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')

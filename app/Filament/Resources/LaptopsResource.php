@@ -72,7 +72,12 @@ class LaptopsResource extends Resource
                         'Rusak' => 'Rusak',
                     ])
                     ->required(),
-                Forms\Components\TextInput::make('keterangan')
+                Forms\Components\Textarea::make('keterangan')
+                    ->rows(3)
+                    ->columnSpan('full')
+                    ->required()
+                    ->extraAttributes(['style' => 'text-transform: uppercase;'])
+                    ->afterStateUpdated(fn($state, callable $set) => $set('keterangan', strtoupper($state)))
                     ->required(),
             ]);
     }
@@ -95,14 +100,30 @@ class LaptopsResource extends Resource
                 Tables\Columns\TextColumn::make('operating_system')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('ket_laptop')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'Baik' => 'success',
+                        'Perlu Maintenance' => 'warning',
+                        'Rusak' => 'danger',
+                    })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('keyboard')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('ket_keyboard')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'Baik' => 'success',
+                        'Rusak' => 'danger',
+                    })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('mouse')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('ket_mouse')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'Baik' => 'success',
+                        'Rusak' => 'danger',
+                    })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('keterangan')
                     ->searchable(),

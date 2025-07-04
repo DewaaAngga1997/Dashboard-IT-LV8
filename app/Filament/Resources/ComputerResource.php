@@ -107,18 +107,39 @@ class ComputerResource extends Resource
                 Tables\Columns\TextColumn::make('operating_system')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('ket_pc')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'Baik' => 'success',
+                        'Perlu Maintenance' => 'warning',
+                        'Rusak' => 'danger',
+                    })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('monitor')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('ket_monitor')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'Baik' => 'success',
+                        'Rusak' => 'danger',
+                    })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('keyboard')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('ket_keyboard')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'Baik' => 'success',
+                        'Rusak' => 'danger',
+                    })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('mouse')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('ket_mouse')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'Baik' => 'success',
+                        'Rusak' => 'danger',
+                    })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('keterangan')
                     ->searchable(),
