@@ -31,6 +31,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->brandName('IT LV8')
+            // ->brandLogo(asset('images/logo.png'))
             ->favicon(asset('images/favicon.ico'))
             ->id('admin')
             ->path('admin')
