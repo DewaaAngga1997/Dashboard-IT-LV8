@@ -15,6 +15,7 @@ class Printer extends Model
         'department_users_id',
         'tanggal_pembelian',
         'type_printer',
+        'ket_printer',
         'keterangan',
     ];
 

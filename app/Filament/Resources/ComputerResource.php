@@ -155,7 +155,15 @@ class ComputerResource extends Resource
             ->filters([
                 SelectFilter::make('department_id')
                     ->label('Department')
-                    ->relationship('department', 'department_name')
+                    ->relationship('department', 'department_name'),
+
+                SelectFilter::make('ket_pc') // <= Tambahan filter ini
+                    ->label('Keterangan PC')
+                    ->options([
+                        'Baik' => 'Baik',
+                        'Perlu Maintenance' => 'Perlu Maintenance',
+                        'Rusak' => 'Rusak',
+                    ]),
 
             ])
             ->actions([
